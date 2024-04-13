@@ -1,0 +1,27 @@
+### Block xmlrpc.php access completely ###
+<Files xmlrpc.php>
+  order deny,allow
+  deny from all
+  allow from 127.0.0.1
+  allow from 1.2.3.4
+  allow from AAAA:BBBB:CCCC:DDDD:1111:2222:3333:4444
+</Files>
+###################################### END
+
+### Block login from invalid referer wp-login.php/wp-admin block ###
+RewriteEngine on
+  RewriteCond %{REQUEST_METHOD} =POST
+  RewriteCond %{HTTP_REFERER} !pad\.vg [NC]
+  RewriteCond %{REQUEST_URI} ^(.*)?wp-login\.php(.*)$ [OR]
+  RewriteCond %{REQUEST_URI} ^(.*)?wp-admin$
+RewriteRule ^(.*)$ - [R=403,L]
+################################################################ END
+
+### Block login attempt from bot user agents on wp-login.php/xmlrpc.php/wp-admin block ###
+RewriteEngine on
+RewriteCond %{HTTP_USER_AGENT} ^.*(SemrushBot|Semrush|AhrefsBot|MJ12bot|YandexBot|YandexImages|MegaIndex.ru|BLEXbot|BLEXBot|ZoominfoBot|YaK|VelenPublicWebCrawler|SentiBot|Vagabondo|SEOkicks|SEOkicks-Robot|mtbot/1.1.0i|SeznamBot|DotBot|Cliqzbot|coccocbot|python|python-requests|Scrap|SiteCheck-sitecrawl|MauiBot|Java|GumGum|Clickagy|AspiegelBot|Yandex|TkBot|CCBot|Qwantify|MBCrawler|serpstatbot|AwarioSmartBot|Semantici|ScholarBot|proximic|MojeekBot|GrapeshotCrawler|IAScrawler|linkdexbot|contxbot|PlurkBot|PaperLiBot|BomboraBot|Leikibot|weborama-fetcher|NTENTbot|Screaming Frog SEO Spider|admantx-usaspb|Eyeotabot|VoluumDSP-content-bot|SirdataBot|adbeat_bot|TTD-Content|admantx|Nimbostratus-Bot|Mail.RU_Bot|Quantcastboti|Onespot-ScraperBot|Taboolabot|Baidu|Jobboerse|VoilaBot|Sogou|Jyxobot|Exabot|ZGrab|Proximi|Sosospider|Accoona|aiHitBot|Genieo|BecomeBot|ConveraCrawler|NerdyBot|OutclicksBot|findlinks|JikeSpider|Gigabot|CatchBot|Huaweisymantecspider|Offline Explorer|SiteSnagger|TeleportPro|WebCopier|WebReaper|WebStripper|WebZIP|Xaldon_WebSpider|BackDoorBot|AITCSRoboti|Arachnophilia|BackRub|BlowFishi|perl|CherryPicker|CyberSpyder|EmailCollector|Foobot|GetURL|httplib|HTTrack|LinkScan|Openbot|Snooper|SuperBot|URLSpiderPro|MAZBot|EchoboxBot|SerendeputyBot|LivelapBot|linkfluence.com|TweetmemeBot|LinkisBot|CrowdTanglebot).*$ [NC]
+RewriteCond %{REQUEST_URI} ^(.*)?wp-login\.php(.*)$ [OR]
+RewriteCond %{REQUEST_URI} ^(.*)?xmlrpc\.php(.*)$ [OR]
+RewriteCond %{REQUEST_URI} ^(.*)?wp-admin$
+RewriteRule ^(.*)$ - [R=403,L]
+###################################################################################### END
