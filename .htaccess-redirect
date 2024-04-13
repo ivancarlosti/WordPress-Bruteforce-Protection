@@ -1,0 +1,7 @@
+# BEGIN Redirect any domain to https and to correct domain #
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  RewriteCond %{HTTP_HOST} !^pad.vg$ [NC]
+  RewriteRule ^(.*)$ https://pad.vg/$1 [L,R=301]
+# END Redirect any domain to correct domain #
