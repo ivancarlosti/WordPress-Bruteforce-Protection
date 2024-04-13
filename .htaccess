@@ -2,9 +2,6 @@
 <Files xmlrpc.php>
   order deny,allow
   deny from all
-  allow from 127.0.0.1
-  allow from 1.2.3.4
-  allow from AAAA:BBBB:CCCC:DDDD:1111:2222:3333:4444
 </Files>
 ###################################### END
 
